@@ -1,0 +1,25 @@
+class Solution {
+    public int maxArea(int[] height) {
+        int maxWater=0;
+        int leftBound=0;
+        int rightBound=height.length-1;
+        while(leftBound<rightBound)
+        {
+            int minHgt=Math.min(height[leftBound],height[rightBound]);
+            int width=rightBound-leftBound;
+            int currWater=minHgt*width;
+            maxWater=Math.max(currWater,maxWater);
+            if(height[leftBound]<height[rightBound])
+            {
+                leftBound++;
+            }
+            else
+            {
+                rightBound--;
+            }
+            
+        }
+       
+        return maxWater;
+    }
+}
