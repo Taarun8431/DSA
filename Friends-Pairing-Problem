@@ -1,0 +1,24 @@
+package Recursion;
+
+public class frndspairing {
+    public static int frndspairing(int n)
+    {
+        if(n==1 || n==2)
+        {
+            return n;
+        }
+        // Single
+        int fnm1= frndspairing(n-1);
+
+        // Pair
+        int fnm2= frndspairing(n-2);
+        int pairWays=(n-1)*fnm2;
+        return fnm1+pairWays;
+    }
+    public static void main(String[]args)
+    {
+        int n=3;
+        System.out.println(frndspairing(n));
+    }
+    
+}
