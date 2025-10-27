@@ -1,0 +1,23 @@
+class tile
+{
+    public static int tilingProblem(int n)
+    {
+        // Base case
+        if(n==0 || n==1)
+        {
+            return 1;
+        }
+        // vertical arrangement 
+        int fnm_1=tilingProblem(n-1);
+        // horizontal arrangement
+        int fnm_2=tilingProblem(n-2);
+        return fnm_1+fnm_2;
+    }
+    public static void main (String []args)
+    {
+        int n=4;
+        System.out.println("The numberof ways the tile can be arranged is : "+tilingProblem(n));
+
+    }
+    
+}
