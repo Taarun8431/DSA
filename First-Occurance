@@ -1,0 +1,23 @@
+package Recursion;
+
+public class firstOccu {
+    public static void main(String[]args)
+    {
+        int arr[]={1,5,6,9,3,2,5,5};
+       System.out.println( firstOccurance(arr,5,arr.length-1));
+    }
+    public static int firstOccurance(int arr[],int key,int i)
+    {
+        if(i==0)
+        {
+            return -1;
+        }
+        if(arr[i]==key)
+        {
+            return i;
+        }
+        return firstOccurance(arr, key, i-1);
+
+    }
+    
+}
