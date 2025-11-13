@@ -1,0 +1,68 @@
+public class nextPermutation {
+    public static void nextPermutation(int []nums)
+
+    {
+        // Step 1: Find the pivot element
+        int pivot=-1;
+        int n=nums.length;
+        for(int i=n-2;i>=0;i--)
+        {
+            if(nums[i]<nums[i+1])
+            {
+                pivot=i;
+                break;
+            }
+        }
+        // Step2: Swap the pivot element with the  next larger element nothing but the last element with 
+        if(pivot!=-1)
+        {
+            for(int i=n-1;i>pivot;i--)
+            {
+                if(nums[i]>pivot)
+                {
+                    int temp=nums[i];
+                    nums[i]=nums[pivot];
+                    nums[pivot]=temp;
+                    break;
+                }
+            }
+        }
+        // If pivot is -1 that means the array is in descending order so we need to reverse the whole array
+        if(pivot==-1)
+        {
+          
+            int i=0;
+            int j=n-1;
+            while(i<j)
+            {
+                int temp=nums[i];
+                nums[i]=nums[j];
+                nums[j]=temp;
+                i++;
+                j--;
+            }
+            return;
+        }
+        // Step 3: Reverse the elements just after theh pivot index till the end of the array
+        int i=pivot+1;
+        int j=n-1;
+        while(i<j)
+        {
+            int temp=nums[i];
+            nums[i]=nums[j];
+            nums[j]=temp;
+            i++;
+            j--;
+        }
+    }
+        public static void main(String[] args) {
+            int []nums={1,2,3,6,5,4};
+            nextPermutation (nums);
+            for(int i=0;i<nums.length;i++)
+            {
+                System.out.print(nums[i]+" ");
+            }
+        }
+    
+
+}
