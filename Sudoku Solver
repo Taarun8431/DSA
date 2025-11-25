@@ -1,0 +1,105 @@
+public class sudokuSolver {
+    public static void printSudoku(int sudoku[][])
+    {
+        for(int i=0;i<9;i++)
+        {
+            for(int j=0;j<9;j++)
+            {
+                System.out.print(sudoku[i][j]+" ");
+            }
+            System.out.println();
+        }
+    }
+    public static boolean isSafe(int [][]sudoku,int row,int col,int digit)
+    {
+        // First check if it is safe to place the digit on the row by checking all columns
+        for(int j=0;j<9;j++)
+        {
+            if(sudoku[row][j]==digit)
+            {
+                return false;
+            }
+        }
+        // Now check for the column if it is safe to place the digit by checking all rows
+        for(int i=0;i<9;i++)
+        {
+            if(sudoku[i][col]==digit)
+            {
+                return false;
+            }
+        }
+        // Now check for the 3x3 grid if it is safe to place the digit
+        int sr=(row/3)*3;
+        int sc=(col/3)*3;
+        for(int i=sr;i<sr+3;i++)
+        {
+            for(int j=sc;j<sc+3;j++)
+            {
+                if(sudoku[i][j]==digit)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    public static boolean sudokuSolver(int sudoku[][],int row,int col)
+    {
+        // This is the base case 
+        if(row==9)
+        {
+            printSudoku(sudoku);
+            return true;
+        }
+
+
+
+        int nextRow=row;
+        int nextCol=col+1;
+        if(nextCol==9)// This checks if the column exceeds the limit then it moves to next Row
+        {
+            nextRow=row+1;
+            nextCol=0;
+        }
+        // If the cell is already filled we just move to the next cell
+          if(sudoku[row][col]!=0)
+                {
+                    return sudokuSolver(sudoku,nextRow,nextCol);
+                }
+        // Logic to fill the sudoku using the backtracking for loop till 9
+        for(int digit=1;digit<=9;digit++)
+        {
+            if(isSafe(sudoku,row,col,digit))
+            {
+               
+                sudoku[row][col]=digit;
+                
+            
+            if(sudokuSolver(sudoku,nextRow,nextCol))
+            {
+                return true;
+            }
+            sudoku[row][col]=0;// Backtracking step
+        }
+        }
+        return false; // this will be returned if no digit can be placed in the given cell
+
+
+    }
+    public static void main(String[] args) {
+        int sudoku[][]={
+            {3,0,6,5,0,8,4,0,0},
+            {5,2,0,0,0,0,0,0,0},
+            {0,8,7,0,0,0,0,3,1},
+            {0,0,3,0,1,0,0,8,0},
+            {9,0,0,8,6,3,0,0,5},
+            {0,5,0,0,9,0,6,0,0},
+            {1,3,0,0,0,0,2,5,0},
+            {0,0,0,0,0,0,0,7,4},
+            {0,0,5,2,0,6,3,0,0}
+        };
+        sudokuSolver(sudoku,0,0);
+        
+    }
+    
+}
