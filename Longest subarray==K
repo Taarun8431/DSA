@@ -1,0 +1,62 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class array1 {
+        public static void main(String []args)
+        {
+            int[]arr={1,2,3,1,1,1,4,2,3};
+            int n=arr.length;
+            int target=3;
+            // We have to write to print the length of the longest subarray
+            // Brute force use 3 loops
+            int maxlen=0;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=i;j<n;j++)
+                {
+                 //   System.out.println("Checking i=" + i + " j=" + j); // DEBUG LINE
+                    int Sum=0;
+                    for(int k=i;k<=j;k++)
+                    {
+                        Sum+=arr[k];
+                       
+                    }
+                     if(Sum==target)
+                        {
+                            maxlen=Math.max(maxlen, j-i+1);
+                        }
+                }
+            }
+            System.out.println("The max lengthis "+maxlen);
+
+
+
+            // Optimized approach using HashMap and Prefix Sum
+            
+    public int longestSubarray(int[] nums, int k) {
+        Map <Integer,Integer>prefixsummap=new HashMap <>();
+        int maxLen=0;
+        int curSum=0;
+        prefixsummap.put(0,-1);
+        for(int i=0;i<nums.length;i++)
+        {
+            curSum+=nums[i];
+            int requiredSum=curSum-k;
+            if(prefixsummap.containsKey(requiredSum))
+            {
+                int j=prefixsummap.get(requiredSum);
+                int currLen=i-j;
+                maxLen=Math.max(currLen,maxLen);
+            }
+            if(!prefixsummap.containsKey(requiredSum))
+            {
+                prefixsummap.put(curSum,i);
+            }
+        }
+        return maxLen;
+       
+    }
+}
+        
+        
+    }
